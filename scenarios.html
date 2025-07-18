@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSafe | Scenario Practice Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                CyberSafe
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="learn.html">Learn</a></li>
+                    <li><a href="scenarios.html">Scenarios</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+            <a href="https://www.cyber.nj.gov/" target="_blank" class="btn btn-primary cta">NJCCIC</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="scenarios" class="content-section">
+             <div class="container">
+                <h2>Game Center – Choose the Best Action</h2>
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span id="scenario-counter">Scenario 1 / 20</span>
+                    </div>
+                    <p id="scenario-question" class="scenario-question">Loading scenario...</p>
+                    <div id="scenario-choices" class="scenario-actions">
+                        </div>
+                    <div id="scenario-feedback" class="feedback"></div>
+                    <button id="next-scenario-btn" class="btn btn-secondary" style="display: none;">Next Scenario →</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="index.html#about">About NJCCIC</a>
+            </div>
+            <p class="copyright">© 2025 CyberSafe. Created by Ved Shah. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Scenario Game Logic - Moved from original script.js
+        document.addEventListener('DOMContentLoaded', function() {
+            const scenarios = [
+                { question: "You receive an email from 'support@yourbankk.com' saying your account is locked and you must click a link to verify your identity.", choices: { A: "Click the link and log in", B: "Delete the email", C: "Call the bank using their official number", D: "Forward the email to your friend for advice" }, bestAnswer: "C", feedback: { A: "❌ Clicking the link could lead to a fake login page designed to steal your credentials.", B: "⚠️ Good instinct, but it's better to report or verify first.", C: "✅ Correct! Calling the bank using a known, trusted number is the safest way to verify. Never trust links from suspicious emails.", D: "❌ Forwarding suspicious emails spreads potential threats." } },
+                { question: "You find a USB drive outside your school. What should you do?", choices: { A: "Plug it into your computer to see what’s inside", B: "Hand it to a teacher or IT staff", C: "Take it home and check it later", D: "Leave it where it is" }, bestAnswer: "B", feedback: { A: "❌ It could contain auto-run malware that infects your system.", B: "✅ Correct! Turning in found tech to school authorities helps prevent malware from spreading.", C: "❌ Unsafe, especially on personal devices.", D: "⚠️ Better than plugging it in, but someone else might." } },
+                { question: "A website you visit shows a pop-up saying 'You have 5 viruses! Click here to fix now!'", choices: { A: "Click the link and download the tool", B: "Close the browser tab", C: "Restart your computer immediately", D: "Open Task Manager and force quit the browser" }, bestAnswer: "D", feedback: { A: "❌ Classic scareware tactic to install malware.", B: "⚠️ May work, but some pop-ups disguise 'X' buttons.", C: "⚠️ Not harmful, but won’t solve the root issue.", D: "✅ Correct! This avoids clicking anything malicious." } },
+                { question: "You get a text: 'Your Apple ID was used to sign in from Nigeria. If this wasn't you, click here.'", choices: { A: "Click the link and change your password", B: "Ignore it", C: "Log into your Apple account via the official site to check", D: "Text back to ask what to do" }, bestAnswer: "C", feedback: { A: "❌ Could be a phishing link.", B: "⚠️ Ignoring might be okay, but verification is better.", C: "✅ Correct! Always go directly to the source rather than clicking unsolicited links.", D: "❌ Never respond directly to unknown or suspicious senders." } },
+                { question: "You use the same password for your school email, Instagram, and Netflix. One of these gets breached.", choices: { A: "Change your Instagram password", B: "Change your school password", C: "Change all your passwords", D: "Do nothing" }, bestAnswer: "C", feedback: { A: "⚠️ Only changes one account, leaving others exposed.", B: "⚠️ Only changes one account, leaving others exposed.", C: "✅ Correct! A breach on one service can affect all accounts that share the same password.", D: "❌ Very risky. Credential stuffing attacks are common." } },
+                { question: "A quiz on Instagram asks 'What was your first pet’s name?' for fun.", choices: { A: "Answer it—it’s just for entertainment", B: "Ignore the quiz", C: "Post a fake answer", D: "Share it and tag friends" }, bestAnswer: ["B", "C"], feedback: { A: "❌ Real info can be used in social engineering.", B: "✅ Correct! These are often data-mining scams targeting password recovery questions.", C: "✅ Correct! These are often data-mining scams targeting password recovery questions.", D: "❌ Spreads the scam and encourages bad habits." } },
+                { question: "You click a Google result that looks like your school’s portal, but the URL says 'sch0ol-login.net'.", choices: { A: "Enter your login info anyway", B: "Check the URL again", C: "Google the real school portal", D: "Use a bookmark you know is safe" }, bestAnswer: "D", feedback: { A: "❌ Dangerous. It’s likely a phishing site.", B: "⚠️ Good step, but don’t trust lookalikes.", C: "⚠️ Still risky if you aren’t sure.", D: "✅ Correct! Using a trusted bookmark or direct URL is the safest." } },
+                { question: "You're at a café and want to check your grades on a school portal.", choices: { A: "Log in using the café Wi-Fi", B: "Use a VPN", C: "Wait until you’re home", D: "Ask the barista if the Wi-Fi is secure" }, bestAnswer: "B", feedback: { A: "⚠️ Risky without protection.", B: "✅ Correct! A VPN encrypts your connection and protects sensitive logins on public networks.", C: "✅ Safer, but not always practical.", D: "❌ Security can't be guaranteed by asking." } },
+                { question: "Your Instagram offers 2FA via SMS or authenticator app. What should you use?", choices: { A: "SMS", B: "Authenticator app", C: "No 2FA", D: "Email instead" }, bestAnswer: "B", feedback: { A: "⚠️ Better than nothing, but vulnerable to SIM swapping.", B: "✅ Correct! Authenticator apps are more secure than SMS.", C: "❌ Always enable 2FA when available.", D: "⚠️ Email alone is not ideal unless also protected." } },
+                { question: "You get a friend request from someone with no mutual friends and no profile picture.", choices: { A: "Accept the request", B: "Message them to ask who they are", C: "Ignore and report", D: "Stalk their profile" }, bestAnswer: "C", feedback: { A: "❌ Can open the door to scams.", B: "⚠️ Could invite manipulation.", C: "✅ Correct! It’s safer to report and ignore suspicious profiles.", D: "⚠️ Curiosity is natural, but don’t engage." } },
+                { question: "You get an email offering $500/week for remote data entry. They want your banking info.", choices: { A: "Send your info", B: "Ask for more job details", C: "Google the company", D: "Delete and report the email" }, bestAnswer: "D", feedback: { A: "❌ You risk identity theft.", B: "⚠️ Scam will continue to manipulate.", C: "⚠️ Good research habit but still risky if they’re fake.", D: "✅ Correct! Classic employment scam. Report and delete." } },
+                { question: "At a mall, a poster says 'Scan to win a free iPhone!' What should you do?", choices: { A: "Scan it", B: "Ignore it", C: "Ask a mall employee if it’s real", D: "Take a picture and scan it later" }, bestAnswer: ["B", "C"], feedback: { A: "❌ Could lead to malware or phishing page.", B: "✅ Correct! QR scams are real. Verify before scanning.", C: "✅ Correct! QR scams are real. Verify before scanning.", D: "❌ Same risk delayed." } },
+                { question: "You’re using a shared computer. What should you do before logging out?", choices: { A: "Clear browser history", B: "Log out of all accounts", C: "Enable private Browse", D: "All of the above" }, bestAnswer: "D", feedback: { A: "⚠️ Partial protection.", B: "⚠️ Partial protection.", C: "⚠️ Partial protection.", D: "✅ Correct! All steps help protect your info." } },
+                { question: "An email from a teacher includes an unexpected .zip attachment.", choices: { A: "Open the file", B: "Ask the teacher directly", C: "Scan with antivirus", D: "Delete it" }, bestAnswer: ["B", "C"], feedback: { A: "❌ Could contain malware.", B: "✅ Correct! Verify the sender or scan first.", C: "✅ Correct! Verify the sender or scan first.", D: "⚠️ Safe but you may lose important content." } },
+                { question: "You post a photo of your new driver's license to show off your score.", choices: { A: "Blur out the license", B: "Post it as is", C: "Delete the photo", D: "Only post it on private story" }, bestAnswer: ["A", "C"], feedback: { A: "✅ Correct! Sensitive info should never be public.", B: "❌ Exposes personal data.", C: "✅ Correct! Sensitive info should never be public.", D: "⚠️ Still a risk — screenshots happen." } },
+                { question: "You get a call saying your computer has a virus and you need to pay to fix it.", choices: { A: "Pay to fix it", B: "Ask what company they’re from", C: "Hang up", D: "Let them remote into your PC" }, bestAnswer: "C", feedback: { A: "❌ Very common scam path.", B: "⚠️ They’ll lie convincingly.", C: "✅ Correct! Real companies never call like this unsolicited.", D: "❌ Very common scam path." } },
+                { question: "Your software needs a critical security update, but you’re busy.", choices: { A: "Delay the update", B: "Schedule for later", C: "Do it now", D: "Ignore it" }, bestAnswer: "C", feedback: { A: "⚠️ Okay short term, but don't forget.", B: "⚠️ Okay short term, but don't forget.", C: "✅ Correct! Delays leave your system vulnerable.", D: "❌ High risk." } },
+                { question: "You get a login alert from a new device you don’t recognize.", choices: { A: "Ignore", B: "Change your password", C: "Enable 2FA", D: "Both B and C" }, bestAnswer: "D", feedback: { A: "❌ Ignoring risks further access.", B: "⚠️ Partial protection.", C: "⚠️ Partial protection.", D: "✅ Correct! Lock it down and prevent future access." } },
+                { question: "Your friend messages: 'OMG is this you in this video?' with a weird link.", choices: { A: "Click it", B: "Ask them directly", C: "Report the message", D: "Open it in incognito" }, bestAnswer: "B", feedback: { A: "❌ Could trigger a phishing page or malware.", B: "✅ Correct! Ask them out-of-band to confirm.", C: "⚠️ Fine if it's clearly a hack, but verify first.", D: "❌ Could trigger a phishing page or malware." } },
+                { question: "You borrow a school Chromebook. What's your responsibility?", choices: { A: "Use your personal Google account", B: "Browse only in incognito", C: "Sign out when done", D: "Clear all downloads and history" }, bestAnswer: ["C", "D"], feedback: { A: "⚠️ Risky on shared devices.", B: "⚠️ Doesn’t fully protect if you forget to sign out.", C: "✅ Correct! Always sign out and clear personal info.", D: "✅ Correct! Always sign out and clear personal info." } }
+            ];
+
+            let currentScenarioIndex = 0;
+            const questionEl = document.getElementById('scenario-question');
+            const choicesEl = document.getElementById('scenario-choices');
+            const feedbackEl = document.getElementById('scenario-feedback');
+            const nextBtn = document.getElementById('next-scenario-btn');
+            const counterEl = document.getElementById('scenario-counter');
+
+            function loadScenario(index) {
+                // Reset state
+                feedbackEl.style.display = 'none';
+                nextBtn.style.display = 'none';
+                choicesEl.innerHTML = '';
+
+                const scenario = scenarios[index];
+                questionEl.textContent = scenario.question;
+                counterEl.textContent = `Scenario ${index + 1} / ${scenarios.length}`;
+
+                for (const [key, value] of Object.entries(scenario.choices)) {
+                    const button = document.createElement('button');
+                    button.className = 'btn-action';
+                    button.dataset.choice = key;
+                    button.textContent = `${key}) ${value}`;
+                    button.addEventListener('click', handleChoice);
+                    choicesEl.appendChild(button);
+                }
+            }
+
+            function handleChoice(event) {
+                const selectedButton = event.target;
+                const selectedChoice = selectedButton.dataset.choice;
+                const scenario = scenarios[currentScenarioIndex];
+                
+                // Disable all buttons
+                choicesEl.querySelectorAll('.btn-action').forEach(btn => btn.disabled = true);
+
+                const isCorrect = Array.isArray(scenario.bestAnswer)
+                    ? scenario.bestAnswer.includes(selectedChoice)
+                    : scenario.bestAnswer === selectedChoice;
+
+                if (isCorrect) {
+                    selectedButton.classList.add('correct');
+                    feedbackEl.className = 'feedback correct';
+                } else {
+                    selectedButton.classList.add('incorrect');
+                    feedbackEl.className = 'feedback incorrect';
+                    // Also highlight the correct answer(s)
+                    choicesEl.querySelectorAll('.btn-action').forEach(btn => {
+                        if (Array.isArray(scenario.bestAnswer) ? scenario.bestAnswer.includes(btn.dataset.choice) : scenario.bestAnswer === btn.dataset.choice) {
+                            btn.classList.add('correct');
+                        }
+                    });
+                }
+
+                feedbackEl.textContent = scenario.feedback[selectedChoice];
+                feedbackEl.style.display = 'block';
+                nextBtn.style.display = 'inline-block';
+            }
+
+            nextBtn.addEventListener('click', () => {
+                currentScenarioIndex = (currentScenarioIndex + 1) % scenarios.length; // Loop back to start
+                loadScenario(currentScenarioIndex);
+            });
+
+            // Initial load
+            loadScenario(currentScenarioIndex);
+        });
+    </script>
+</body>
+</html>
