@@ -9,3 +9,7 @@ Plain (vanilla) JavaScript for the dynamic elements, such as the header scroll e
 
 Version 2:
 created: NJCCIC Info and attempted to randomize questions
+
+
+Version 3:
+added: privacy-terms.html | isolated "About" | changed NJCCIC page 
